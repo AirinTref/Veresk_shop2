@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+    <title>Вереск.магазин целебных трав</title>
+
+</head>
+<body>
+<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container-fluid">
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarExample01"
+                    aria-controls="navbarExample01"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarExample01">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item active nav_person">
+                        <a class="nav-link" aria-current="page" href="#">Главная</a>
+                    </li>
+                    <li class="nav-item nav_person">
+                        <a class="nav-link" href="#">О магазине</a>
+                    </li>
+                    <li class="nav-item nav_person">
+                        <a class="nav-link" th:href="@{/orders}">Мои заказы</a>
+                    </li>
+                </ul>
+            </div>
+
+            <form method="get" th:action="@{/cart}">
+                <button type="submit" class="btn-green-person">Моя корзина</button>
+            </form>
+            <form method="post" th:action="@{/logout}">
+                <button type="submit" class="btn-green-person">Выйти</button>
+            </form>
+
+        </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Background image -->
+    <div
+            class="p-5 text-center bg-image"
+            style="
+      background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+      height: 400px;
+    "
+    >
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <div class="text-white">
+                    <h1 class="mb-3">Вереск- магазин целебных трав</h1>
+                    <h5 class="mb-3">МИР ВАШЕМУ ДОМУ</h5>
+                    <!--  <a class="btn btn-outline-light btn-lg" href="#!" role="button"
+                      >Call to action</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Background image -->
+</header>
+
+<h5>Каталог товаров </h5>
+
+<div class="container">
+    <div class="row">
+        <div  class="col-sm cardGrid">
+            <div th:each="product : ${product}" class="card mb-2  mt-3 p-5" style="max-width: 300px; max-height: 400px">
+                <img th:src="'/static/img/' + ${product.imageList[0].getFileName()}" width="150" height="auto">
+                <div class="card-body">
+                    <p class="card-name" th:href="@{/product/info/{id}(id=${product.getId()})}"
+                       th:text="${product.getTitle()}"></p>
+                    <p class="card-text" th:href="@{/product/info/{id}(id=${product.getId()})}"
+                       th:text="${product.getDescription()}"></p>
+                    <div class="d-flex justify-content-between align-items-center price">
+                        <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+                        <br>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary"><a
+                                th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="'Подробнее'"></a>
+                        </button>
+
+                        <button type="button" class="btn btn-sm btn-outline-secondary"><a
+                                th:href="@{/cart/add/{id}(id=${product.getId()})}" th:text="'Купить'"></a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<br>
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col sort_and_search">
+            <div class="bg-ivory sort_and_search">
+                <h7>Cортировка, поиск, фильтрация</h7>
+                <form th:method="POST" th:action="@{/product/user/personAccount/search2}">
+                    <fieldset>
+                        <legend>Выберите параметры для сортировки, поиска, фильтрации:</legend>
+                        <label for="search">Поиск по наименованию</label>
+                        <input type="text" id="search" name="search" th:value="*{value_search2}">
+                        <br>
+
+                        <p>Цена, P</p>
+                        <label for="ot">От</label>
+                        <input type="text" name="ot" id="ot" th:value="*{value_price_ot2}">
+                        <label for="do">До</label>
+                        <input type="text" name="do" id="do" th:value="*{value_price_do2}">
+                        <br>
+                        <br>
+
+
+                        <div>
+                            <input type="radio" id="ascending_price" name="price" value="sorted_by_ascending_price2">
+                            <label for="ascending_price">Отсортировать по возрастанию цены</label>
+                            <input type="radio" id="descending_price" name="price"
+                                   value="sorted_by_descending_price2">
+                            <label for="descending_price">Отсортировать по убыванию цены</label>
+                            <br>
+
+
+                            <p>Категория товаров: </p>
+                            <!--Категория 1. Чай-->
+                            <input type="radio" id="tea" name="contract" value="tea">
+                            <label for="tea">Чай</label>
+
+                            <!--Категория 2. Травяной сбор-->
+                            <input type="radio" id="grass" name="contract" value="grass">
+                            <label for="grass">Травяной сбор</label>
+
+                            <!--Категория 4. Букеты из самоцветов-->
+                            <input type="radio" id="flower" name="contract" value="flower">
+                            <label for="flower">Букеты из сухоцветов</label>
+
+                            <!--Категория 5. Соль для ванны-->
+                            <input type="radio" id="salt" name="contract" value="salt">
+                            <label for="salt">Соль для ванны</label>
+                            <br>
+
+                            <input type="submit" value="Найти" class="btn-green-person">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="col">
+            <h5>Результат поиска</h5>
+            <div th:each="product : ${search_product2}" class="bg-ivory sort_and_search">
+
+                <br>
+                <img th:src="'/static/img/' + ${product.imageList[0].getFileName()}" width="300px">
+                <br>
+                <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+                <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+                <p th:text="'Категория ' + ${product.getCategory()}"></p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous">
+
+</script>
+
+ </body>
+</html>

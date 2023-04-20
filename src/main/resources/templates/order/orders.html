@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказы</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+<div class="container-sm ">
+    <nav class="nav">
+        <form th:action="@{/admin}" class="m-2">
+            <input type="submit" value="Назад" class="btn btn-sm btn-warning">
+        </form>
+    </nav>
+
+    <div class="content">
+
+        <h3 class="text-center m-3"><span th:text="${typeOrder}"></span> Заказы</h3>
+
+        <table class="table table-bordered table-group-divider table-sm">
+            <thead>
+            <tr class="table-info text-center">
+                <th scope="col">№</th>
+                <th scope="col">Статус заказа</th>
+                <th scope="col">ID покупателя</th>
+                <th scope="col">Имя покупателя</th>
+                <th scope="col">Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order: ${orders}">
+                <td th:text="${order.id}">№</td>
+                <td th:text="${order.getStatus()}">Статус</td>
+                <td th:text="${order.person.id}">id</td>
+                <td th:text="${order.person.login}">Имя</td>
+                <td class="d-flex justify-content-center">
+                    <form th:action="@{/admin/orders/{orderId}/show(orderId=${order.id})}"
+                          th:method="get"
+                          class="m-2">
+                        <button class="btn btn-sm btn-info">показать</button>
+                    </form>
+
+                    <th:block th:if="${isNewOrders} == true">
+                        <div class="d-flex justify-content-center">
+                            <form th:action="@{/admin/orders/{orderId}/accept(orderId=${order.id})}"
+                                  th:method="get"
+                                  class="m-2">
+                                <button class="btn btn-sm btn-success">принять</button>
+                            </form>
+                            <form th:action="@{/admin/orders/{orderId}/reject(orderId=${order.id})}"
+                                  th:method="get"
+                                  class="m-2">
+                                <button class="btn btn-sm btn-danger">отказать</button>
+                            </form>
+                        </div>
+                    </th:block>
+
+                    <th:block th:if="${isAcceptedOrders} == true">
+                        <div class="d-flex justify-content-center">
+                            <form th:action="@{/admin/orders/{orderId}/finished(orderId=${order.id})}"
+                                  th:method="get"
+                                  class="m-2">
+                                <button class="btn btn-sm" style="background-color: #0d6efd">завершить</button>
+                            </form>
+                        </div>
+                    </th:block>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>

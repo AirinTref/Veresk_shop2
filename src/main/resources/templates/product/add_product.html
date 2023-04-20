@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавлениe товара</title>
+</head>
+<body>
+<!--name, description, price, weight, actionDate, EXP_date, category
+com.example.veresk_shop.models.Product()-->
+<h3>Добавление товара</h3>
+<form th:method="POST" th:action="@{/admin/product/add}" th:object="${product}" enctype="multipart/form-data">
+
+ <!--НАИМЕНОВАНИЕ-->
+    <label for="title">Наименование товара:</label>
+    <input type="text" th:field="*{title}" id="title">
+    <div style="color: #d54209" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+<br>
+
+<!--КАТЕГОРИЯ-->
+    <label for="category">Категория: </label>
+    <select name="category" th:field="*{category}" id="category">
+        <div th:each="element : ${category}">
+            <option th:text="${element.getName()}" th:value="${element.getId()}">
+        </div>
+    </select>
+    <div style="color: #d54209" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
+    <br>
+
+<!--ОПИСАНИЕ <input type="text" th:field="*{description}" id="description">-->
+    <label for="description">Описание товара:</label><br>
+    <textarea cols="60" rows="15" th:field="*{description}" id="description"></textarea>
+    <div style="color: #d54209" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+    <br>
+
+<!--ВЕС-->
+    <label for="weight">Вес:</label>
+    <input type="text" th:field="*{weight}" id="weight">
+    <div style="color: #d54209" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+    <br>
+
+<!--ДАТА ИЗГОТОВЛЕНИЯ-->
+    <label for="actionDate">Дата изготовления:</label>
+    <input type="text" th:field="*{actionDate}" id="actionDate">
+    <div style="color: #d54209" th:if="${#fields.hasErrors('actionDate')}" th:errors="*{actionDate}"></div>
+    <br>
+
+<!--СРОК ГОДНОСТИ-->
+    <label for="EXP_date">Срок годности:</label>
+    <input  type="text" th:field="*{EXP_date}" id="EXP_date">
+    <div style="color: #d54209" th:if="${#fields.hasErrors('EXP_date')}" th:errors="*{EXP_date}"></div>
+    <br>
+
+<!--ЦЕНА-->
+       <label  for="price">Цена:</label>
+       <input type="text" th:field="*{price}" id="price">
+    <div style="color: #d54209" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+
+<!--КНОПКА отправки ДАННЫХ-->
+    <br>
+    <br>
+    <p style="color: red">Добавить до 5 фотографий.</p>
+    <input type="file" name="file_one">
+    <input type="file" name="file_two">
+    <input type="file" name="file_three">
+    <input type="file" name="file_four">
+    <input type="file" name="file_five">
+    <br>
+    <br>
+    <input type="submit" value="Добавить">
+   </form>
+   </body>
+   </html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <link th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+    <title>Информация о товаре</title>
+</head>
+<body>
+<!--name, description, price, weight, actionDate, EXP_date, category-->
+
+ <!--<p th:text="'Артикул товара:' + ${product.getId()}"></p>
+<p th:text="'Наименование:' + ${product.getName()}"></p>
+
+<p th:text="'Категория:' + ${product.getCategory().getName()}"></p>
+<p th:text="'Описание:' + ${product.getDescription()}"></p>
+<p th:text="'Вес:' + ${product.getWeight()}"></p>
+<p th:text="'Дата изготовления:' + ${product.getActionDate()}+ 'год'"></p>
+<p th:text="'Срок годности:' + ${product.getEXP_date()}"></p>
+<p th:text="'Цена:' + ${product.getPrice()}+ 'рублей'"></p>-->
+<div class="card mb-3" style="max-width: 640px;">
+    <div class="row g-0">
+        <div class="col-md-4"th:each="img : ${product.getImageList()}">
+                <img th:src="'/static/img/' + ${img.getFileName()}" style="width: 200px;
+  height: auto">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title" th:text="'Наименование:' + ${product.getTitle()}"></h5>
+                <p th:text="'Категория:' + ${product.getCategory().getName()}"></p>
+                <p th:text="'Описание:' + ${product.getDescription()}"></p>
+                <p th:text="'Вес:' + ${product.getWeight()}"></p>
+                <p th:text="'Дата изготовления:' + ${product.getActionDate()}+ 'год'"></p>
+                <p th:text="'Срок годности:' + ${product.getEXP_date()}"></p>
+                <p th:text="'Цена:' + ${product.getPrice()}+ 'рублей'" class="card-text"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<a th:href="@{/admin/product/edit/{id}(id=${product.getId()})}"><button>Редактировать</button></a>-->
+<!--<a th:href="@{/admin/product/delete/{id}(id=${product.getId()})}"><button>Удалить</button></a>-->
+</body>
+</html>
