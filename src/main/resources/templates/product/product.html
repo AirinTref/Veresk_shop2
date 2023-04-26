@@ -59,10 +59,8 @@
     <div
             class="p-5 text-center bg-image"
             style="
-      background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
-      height: 400px;
-    "
-    >
+      background-image: url('https://sun9-28.userapi.com/impg/xD9iMLqj3qLLrrjwE7-OI4gk-vhUm5d70-H1sw/sVxb5BmfAHc.jpg?size=1113x527&quality=95&sign=50c4a01db0383ef646210fbdf7986214&type=album');
+      height: 500px;">
         <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
             <div class="d-flex justify-content-center align-items-center h-100">
                 <div class="text-white">
@@ -101,10 +99,11 @@
                 <div class="row">
                     <div class="col-sm-8 col-md-7 py-4">
                         <h4>Обо мне</h4>
-                        <p class="text-body-secondary">Светлого дня,меня зовут Татьяна Проничева, я потомственная травница, с юности с любовью собираю лекарственные растения по всем правилам искусства травничества вручную в экологически чистом районе Владимирской области. В моём магазине все товары приготовлены полностью вручную из ароматных лекарственных трав и других ценных веществ и ингредиентов.
+                       <p class="text-body-secondary">Светлого дня,меня зовут Татьяна Проничева, я потомственная травница, с юности с любовью собираю лекарственные растения по всем правилам искусства травничества вручную в экологически чистом районе Владимирской области. В моём магазине все товары приготовлены полностью вручную из ароматных лекарственных трав и других ценных веществ и ингредиентов.
                             <br><br>Добро пожаловать в магазин целебных трав "Вереск"!</p>
                     </div>
                     <div class="col-sm-4 offset-md-1 py-4">
+                        <img th:src="@{/img/info_Tanya.JPG}"style="width:300px; height: 200px">
                         <h4>Контакты</h4>
                         <ul class="list-unstyled">
                             <li class="text-white">Инстаграм</li>
@@ -114,8 +113,6 @@
                 </div>
             </div>
         </div>
-
-
 
 
         <div class="navbar navbar-dark bg-dark shadow-sm">
@@ -148,11 +145,14 @@
         </section>
 
 
+
+
         <div class="container">
             <div class="row ">
                 <div class="col-sm cardGrid">
-                    <div th:each="product : ${product}" class="card mb-2  mt-3 p-5" style="max-width: 300px; max-height: 400px" >
-                        <img th:src="'/static/img/' + ${product.imageList[0].getFileName()}" width="200" height="auto">
+        <!--начало card-->
+                    <div th:each="product : ${product}" class="card mb-2  mt-3 p-5 " style="max-width: 260px; max-height: 400px" >
+                        <img th:src="'/static/img/' + ${product.imageList[0].getFileName()}"style="width:150px; height: 150px">
                         <div class="card-body">
                             <p class="card-name" th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></p>
                             <p class="card-text" th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getDescription()}"> </p>
@@ -167,6 +167,7 @@
                             </div>
                         </div>
                     </div>
+                    <!--конец card-->
                 </div>
 
             </div>

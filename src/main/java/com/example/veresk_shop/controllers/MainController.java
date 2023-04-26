@@ -175,7 +175,7 @@ public class MainController {
 //УНИКАЛЬНОСТЬ СТРОКИ для заказа(полного)
         String uuid = UUID.randomUUID().toString();
         for(Product product:productList){
-            Order newOrder = new Order(uuid, product, personDetails.getPerson(), 1, product.getPrice(), Status.Получен);
+            Order newOrder = new Order(uuid, product, personDetails.getPerson(), 1, product.getPrice(), Status.ACCEPTED);
             orderRepository.save(newOrder);
             cartRepository.deleteCartByProductId(product.getId());
         }

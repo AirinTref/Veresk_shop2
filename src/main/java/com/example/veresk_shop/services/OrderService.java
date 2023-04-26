@@ -41,6 +41,11 @@ public class OrderService {
         orderRepository.save(order);
     }
 
+    @Transactional
+    public List<String> getOrderByNumberEndingWithIgnoreCase(String searchOrder) {
+        return orderRepository.findByNumberEndingWithIgnoreCase(searchOrder);
+    }
+
 //    @Transactional
 //    public void createOrderByClientId(Integer clientId) {
 //        Cart cart = cartService.getCartByClientId(clientId);

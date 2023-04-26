@@ -16,4 +16,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query(value = "select o from Order o where o.status =:orderStatus")
     List<Order> getAllByOrderStatus(Status orderStatus);
 
+    @Query(value = "select o from Order o where o.number =:searchOrder")
+    List<String> findByNumberEndingWithIgnoreCase(String searchOrder);
+
 }

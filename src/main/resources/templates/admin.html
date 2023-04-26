@@ -66,7 +66,7 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
+        <a href="/admin/orders/all" class="nav-link text-white">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Заказы
         </a>
@@ -75,18 +75,14 @@
 
        <!--список покупателей width="16" height="16"-->
 
-       <div class="text-white bi me-2  nav-link">
-         <form th:method="POST" th:action="@{/admin/listPersons}">Покупатели
-         <input type="submit" value="показать">
-         </form>
-       </div>
+        <form th:method="GET" th:action="@{/listPersons}">
+          <input type="submit" value="Покупатели" class="customers">
+        </form>
+
 <!--          <div>-->
 <!--          <p th:text="'Покупатели: ' + ${persons.getAllPersons}"></p></div>-->
-
         <!--список покупателей-->
       </li>
-
-
 
 
       <li>

@@ -8,7 +8,7 @@
     <title>Вереск.магазин целебных трав</title>
 
 </head>
-<body>
+<body  class="bg-ivory">
 <header>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
@@ -50,13 +50,10 @@
     <!-- Navbar -->
 
     <!-- Background image -->
-    <div
-            class="p-5 text-center bg-image"
+    <div class="p-5 text-center bg-image"
             style="
-      background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
-      height: 400px;
-    "
-    >
+      background-image: url('https://sun9-46.userapi.com/impg/pVdFUNe3jtuN6raR4h5KfvZncXrdS31Mmdm9qg/ptO-pwBKy3Q.jpg?size=1740x861&quality=95&sign=382262f87b768d898c039189b0b83429&type=album');
+      height: 400px;">
         <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
             <div class="d-flex justify-content-center align-items-center h-100">
                 <div class="text-white">
@@ -71,42 +68,39 @@
     <!-- Background image -->
 </header>
 
-<h5>Каталог товаров </h5>
-
+<h1 class="fw-light" id="catalog">Каталог товаров</h1>
 <div class="container">
-    <div class="row">
-        <div  class="col-sm cardGrid">
-            <div th:each="product : ${product}" class="card mb-2  mt-3 p-5" style="max-width: 300px; max-height: 400px">
-                <img th:src="'/static/img/' + ${product.imageList[0].getFileName()}" width="150" height="auto">
+    <div class="row ">
+        <div class="col-sm cardGrid">
+            <!--начало card-->
+            <div th:each="product : ${product}" class="card mb-2  mt-3 p-5 " style="max-width: 260px; max-height: 400px" >
+                <img th:src="'/static/img/' + ${product.imageList[0].getFileName()}"style="width:150px; height: 150px">
                 <div class="card-body">
-                    <p class="card-name" th:href="@{/product/info/{id}(id=${product.getId()})}"
-                       th:text="${product.getTitle()}"></p>
-                    <p class="card-text" th:href="@{/product/info/{id}(id=${product.getId()})}"
-                       th:text="${product.getDescription()}"></p>
+                    <p class="card-name" th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></p>
+                    <p class="card-text" th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getDescription()}"> </p>
                     <div class="d-flex justify-content-between align-items-center price">
                         <p th:text="'Цена: ' + ${product.getPrice()}"></p>
                         <br>
                     </div>
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-secondary"><a
-                                th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="'Подробнее'"></a>
-                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">  <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="'Подробнее'"></a></button>
 
-                        <button type="button" class="btn btn-sm btn-outline-secondary"><a
-                                th:href="@{/cart/add/{id}(id=${product.getId()})}" th:text="'Купить'"></a></button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary"><a th:href="@{/cart/add/{id}(id=${product.getId()})}" th:text="'Купить'"></a></button>
                     </div>
                 </div>
             </div>
+            <!--конец card-->
         </div>
 
     </div>
 </div>
 
 
+
 <br>
 
 
-<div class="container">
+<div class="container" style="border: #093b3d 1px solid">
     <div class="row">
 
         <div class="col sort_and_search">
@@ -163,8 +157,9 @@
 
         </div>
 
-        <div class="col">
-            <h5>Результат поиска</h5>
+        <div class="col" style="text-align: right">
+            <br>
+            <h9>Результат поиска</h9>
             <div th:each="product : ${search_product2}" class="bg-ivory sort_and_search">
 
                 <br>
@@ -176,6 +171,7 @@
             </div>
         </div>
     </div>
+</div>
 
 
 

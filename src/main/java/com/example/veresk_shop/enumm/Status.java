@@ -1,9 +1,20 @@
 package com.example.veresk_shop.enumm;
 
 public enum Status {
-    Принят, Оформлен, Ожидает, Получен,
-    NEW, // новый
-    ACCEPTED, // принятый
-    REJECTED, // отклоненный
-    FINISHED // завершенный
+    NEW("Новый"), // новый
+    ACCEPTED("В работе"), // принятый
+    REJECTED("Отклонен"), // отклоненный
+    FINISHED("Завершен") // завершенный
+    ;
+
+    private final String displayValue;
+
+    Status(String displayValue) {
+        this.displayValue = displayValue;
+    }
+
+    public String getDisplayValue() {
+        return displayValue;
+    }
 }
+

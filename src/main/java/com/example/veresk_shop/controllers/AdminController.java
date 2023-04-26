@@ -10,7 +10,6 @@ import com.example.veresk_shop.services.PersonService;
 import com.example.veresk_shop.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,22 +33,29 @@ public class AdminController {
 
     private final CategoryRepository categoryRepository;
     private final PersonService personService;
+    private final PersonRepository personRepository;
 
-    public AdminController(ProductService productService, CategoryRepository categoryRepository, PersonService personService, OrderService orderService, OrderRowService orderRowService) {
+    public AdminController(ProductService productService, CategoryRepository categoryRepository, PersonService personService, PersonRepository personRepository, OrderService orderService, OrderRowService orderRowService) {
         this.productService = productService;
         this.categoryRepository = categoryRepository;
         this.personService = personService;
+        this.personRepository = personRepository;
         this.orderService = orderService;
         this.orderRowService = orderRowService;
     }
 
-
     @GetMapping("/listPersons")
-    public String getAllPersons(Model model) {
-        model.addAttribute("persons", personService.getAllPersons());
-        return "/admin";
+    public String allPersons(Model model) {
+        model.addAttribute("person", personService.getAllPersons());
+        return "listPersons";
     }
-//
+
+    @GetMapping("/admin")
+    public String admin(Model model) {
+        model.addAttribute("product", productService.getAllProducts());
+        return "admin";
+    }
+
 //    @GetMapping("/listPerson")
 //    public String getAllPersons(Model model) {
 //        model.addAttribute("person", personService.getAllPersons());
@@ -152,11 +159,7 @@ public class AdminController {
     }
 
 
-    @GetMapping("/admin")
-    public String admin(Model model) {
-        model.addAttribute("product", productService.getAllProducts());
-        return "admin";
-    }
+
 
     @GetMapping("/admin/product/delete/{id}")
     public String deleteProduct(@PathVariable("id") int id) {
@@ -195,6 +198,17 @@ public class AdminController {
         model.addAttribute("typeOrder", "All");
         return "/order/orders";
     }
+
+//    @GetMapping("/admin/orders/all/{search_order}")
+//    public String getOrderByNumber(Model model, @PathVariable("search_order") String search_order) {
+//        //uuuid'ы
+//        List<String> allOrdersNumbers = orderService.getOrderByNumberEndingWithIgnoreCase(search_order);
+//        // отредактированные ююды в котором хранятся окончания из 4-5 цифр (его надо возвращать)
+//        List<String> editedNumber = new ArrayList<>();
+//        allOrdersNumbers.stream().forEach(number -> editedNumber.add(number.indexOf(1)));
+//        model.addAttribute("orderNumber", allOrdersNumbers);
+//        return "/order/search_order";
+//    }
 
     //новые заказы
     @GetMapping("/admin/orders/new")

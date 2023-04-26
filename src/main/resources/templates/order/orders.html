@@ -19,6 +19,15 @@
     </nav>
 
     <div class="content">
+        <form  class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">найти</button>
+        </form>
+
+        <div th:each="order: ${orderNumber}">
+            <p th:text="'Номер заказа: ' + "> нашли </p>
+        </div>
+
 
         <h3 class="text-center m-3"><span th:text="${typeOrder}"></span> Заказы</h3>
 
@@ -26,6 +35,7 @@
             <thead>
             <tr class="table-info text-center">
                 <th scope="col">№</th>
+                <th scope="col">Уникальный номер</th>
                 <th scope="col">Статус заказа</th>
                 <th scope="col">ID покупателя</th>
                 <th scope="col">Имя покупателя</th>
@@ -35,6 +45,7 @@
             <tbody>
             <tr th:each="order: ${orders}">
                 <td th:text="${order.id}">№</td>
+                <td th:text="${order.number}">uuid</td>
                 <td th:text="${order.getStatus()}">Статус</td>
                 <td th:text="${order.person.id}">id</td>
                 <td th:text="${order.person.login}">Имя</td>
